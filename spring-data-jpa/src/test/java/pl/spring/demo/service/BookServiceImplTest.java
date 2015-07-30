@@ -1,8 +1,10 @@
 package pl.spring.demo.service;
 
+import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -15,6 +17,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookServiceImplTest {
 
     @Autowired
@@ -30,6 +33,7 @@ public class BookServiceImplTest {
         assertEquals(6, allBooks.size());
     }
 
+    
     @Test
 //  @Ignore
     public void testShouldFindAllBooksByTitle() {
@@ -117,5 +121,27 @@ public class BookServiceImplTest {
         bookService.saveBook(bookToSave);
         // then
         fail("test should throw BookNotNullIdException");
+    }
+
+    @Test
+//  @Ignore
+    public void testZShouldSaveBook() {
+    	// given
+    	BookTo bookToSave1 = new BookTo(null, "title", "author author");
+    	BookTo bookToSave2 = new BookTo(null, "title", "author author");
+    	BookTo bookToSave3 = new BookTo(null, "title", "author author");
+    	
+    	// when
+    	BookTo result1 = bookService.saveBook(bookToSave1);
+    	BookTo result2 = bookService.saveBook(bookToSave2);
+    	BookTo result3 = bookService.saveBook(bookToSave3);
+    	
+    	// then
+    	assertNotNull(bookToSave1.getId());
+    	assertNotNull(bookToSave2.getId());
+    	assertNotNull(bookToSave3.getId());
+    	assertNotEquals(result1.getId(), result2.getId());
+    	assertNotEquals(result2.getId(), result3.getId());
+    	assertNotEquals(result3.getId(), result1.getId());
     }
 }
