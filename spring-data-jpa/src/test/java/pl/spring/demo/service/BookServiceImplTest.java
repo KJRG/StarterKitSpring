@@ -31,7 +31,7 @@ public class BookServiceImplTest {
     }
 
     @Test
-    @Ignore
+//  @Ignore
     public void testShouldFindAllBooksByTitle() {
         // given
         final String title = "Opium w rosole";
@@ -40,6 +40,72 @@ public class BookServiceImplTest {
         // then
         assertNotNull(booksByTitle);
         assertFalse(booksByTitle.isEmpty());
+        assertEquals(1, booksByTitle.size());
+    }
+
+    @Test
+//  @Ignore
+    public void testShouldFindAllBooksByTitlesPrefix() {
+    	// given
+    	final String title = "Pan S";
+    	// when
+    	List<BookTo> booksByTitle = bookService.findBooksByTitle(title);
+    	// then
+    	assertNotNull(booksByTitle);
+    	assertFalse(booksByTitle.isEmpty());
+    	assertEquals(1, booksByTitle.size());
+    }
+
+    @Test
+//  @Ignore
+    public void testShouldFindAllBooksByAuthorsFullFirstName() {
+    	// given
+    	final String author = "Jan";
+    	// when
+    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
+    	// then
+    	assertNotNull(booksByAuthor);
+    	assertFalse(booksByAuthor.isEmpty());
+    	assertEquals(1, booksByAuthor.size());
+    }
+
+    @Test
+//  @Ignore
+    public void testShouldFindAllBooksByAuthorsFirstNamesPrefix() {
+    	// given
+    	final String author = "Niz";
+    	// when
+    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
+    	// then
+    	assertNotNull(booksByAuthor);
+    	assertFalse(booksByAuthor.isEmpty());
+    	assertEquals(1, booksByAuthor.size());
+    }
+
+    @Test
+//  @Ignore
+    public void testShouldFindAllBooksByAuthorsFullLastName() {
+    	// given
+    	final String author = "Fredro";
+    	// when
+    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
+    	// then
+    	assertNotNull(booksByAuthor);
+    	assertFalse(booksByAuthor.isEmpty());
+    	assertEquals(1, booksByAuthor.size());
+    }
+
+    @Test
+//  @Ignore
+    public void testShouldFindAllBooksByAuthorsLastNamesPrefix() {
+    	// given
+    	final String author = "Fredro";
+    	// when
+    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
+    	// then
+    	assertNotNull(booksByAuthor);
+    	assertFalse(booksByAuthor.isEmpty());
+    	assertEquals(1, booksByAuthor.size());
     }
 
     @Test(expected = BookNotNullIdException.class)

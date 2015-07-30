@@ -3,7 +3,9 @@ package pl.spring.demo.aop;
 
 import org.springframework.aop.MethodBeforeAdvice;
 import pl.spring.demo.annotation.NullableId;
+import pl.spring.demo.dao.impl.BookDaoImpl;
 import pl.spring.demo.exception.BookNotNullIdException;
+import pl.spring.demo.to.BookTo;
 import pl.spring.demo.to.IdAware;
 
 import java.lang.reflect.Method;
@@ -15,7 +17,15 @@ public class BookDaoAdvisor implements MethodBeforeAdvice {
 
         if (hasAnnotation(method, o, NullableId.class)) {
             checkNotNullId(objects[0]);
+            setId(objects[0], o);
         }
+    }
+    
+    private void setId(Object bookObject, Object bookDaoImplObject) {
+    	if(bookObject instanceof BookTo && bookDaoImplObject instanceof BookDaoImpl) {
+    		BookDaoImpl bookDaoImpl = (BookDaoImpl) bookDaoImplObject;
+    		((BookTo) bookObject).setId(bookDaoImpl.getSequence().nextValue(bookDaoImpl.findAll()));
+    	}
     }
 
     private void checkNotNullId(Object o) {

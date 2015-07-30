@@ -1,0 +1,52 @@
+package pl.spring.demo.common;
+
+import pl.spring.demo.to.AuthorTo;
+import pl.spring.demo.to.BookTo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.springframework.stereotype.Component;
+
+import pl.spring.demo.entity.BookEntity;
+
+@Component
+public class BookMapper {
+	public BookTo convertFromBookEntity(BookEntity bookToConvert) {
+		BookTo converted = new BookTo();
+		converted.setId(bookToConvert.getId());
+		converted.setTitle(bookToConvert.getTitle());
+		
+		String authors = "";
+		ListIterator<AuthorTo> iter = bookToConvert.getAuthors().listIterator();
+		
+		while(iter.hasNext()) {
+			AuthorTo a = iter.next();
+			authors.concat(a.getFirstName() + " " + a.getLastName());
+			if(iter.hasNext()) {
+				authors.concat(",");
+			}
+		}
+		converted.setAuthors(authors);
+		
+		return converted;
+	}
+
+	public BookEntity convertFromBookTo(BookTo bookToConvert) {
+		BookEntity converted = new BookEntity();
+		converted.setId(bookToConvert.getId());
+		converted.setTitle(bookToConvert.getTitle());
+		
+		List<AuthorTo> authorsList = new ArrayList<>();
+		String[] authors = bookToConvert.getAuthors().split(",");
+		
+		for(String a : authors) {
+			String[] fullName = a.split(" ");
+			authorsList.add(new AuthorTo(0L, fullName[0], fullName[1]));
+		}
+		converted.setAuthors(authorsList);
+		
+		return converted;
+	}
+}
