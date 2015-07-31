@@ -23,7 +23,6 @@ public class BookDaoAdvisor implements MethodBeforeAdvice {
         if (hasAnnotation(method, o, NullableId.class)) {
             checkNotNullId(objects[0]);
             setId(objects[0], o);
-            
         }
     }
     
