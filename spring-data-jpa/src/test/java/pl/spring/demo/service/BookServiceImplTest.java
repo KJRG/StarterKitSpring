@@ -1,7 +1,6 @@
 package pl.spring.demo.service;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -11,7 +10,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.BookTo;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -120,19 +122,19 @@ public class BookServiceImplTest {
     @Test
     public void testZShouldSaveBooks() {
     	// given
-    	BookTo bookToSave1 = new BookTo(null, "title", "author author");
-    	BookTo bookToSave2 = new BookTo(null, "title", "author author");
-    	BookTo bookToSave3 = new BookTo(null, "title", "author author");
+    	List<BookTo> booksToSave = new ArrayList<>();
+    	Set<Long> booksIds = new HashSet<>();
+    	for(int i = 0; i < 3; i++) {
+    		booksToSave.add(new BookTo(null, "title", "author author"));
+    	}
     	// when
-    	BookTo result1 = bookService.saveBook(bookToSave1);
-    	BookTo result2 = bookService.saveBook(bookToSave2);
-    	BookTo result3 = bookService.saveBook(bookToSave3);
+    	for(BookTo bt : booksToSave) {
+    		bookService.saveBook(bt);
+    	}
     	// then
-    	assertNotNull(result1.getId());
-    	assertNotNull(result2.getId());
-    	assertNotNull(result3.getId());
-    	assertNotEquals(result1.getId(), result2.getId());
-    	assertNotEquals(result2.getId(), result3.getId());
-    	assertNotEquals(result3.getId(), result1.getId());
+    	for(BookTo bt : booksToSave) {
+    		assertNotNull(bt);
+    		booksIds.add(bt.getId());
+    	}
     }
 }

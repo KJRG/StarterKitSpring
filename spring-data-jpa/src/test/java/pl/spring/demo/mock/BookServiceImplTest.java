@@ -80,8 +80,10 @@ public class BookServiceImplTest {
 				return null;
 			}
 		});
+		
 		// when
 		BookTo result = bookService.saveBook(book);
+		
 		// then
 		Mockito.verify(mapper).convertToBookEntity(book);
 		Mockito.verify(bookDao).save(Matchers.any(BookEntity.class));

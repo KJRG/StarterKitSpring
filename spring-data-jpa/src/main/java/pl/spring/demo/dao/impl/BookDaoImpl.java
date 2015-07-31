@@ -5,15 +5,12 @@ import pl.spring.demo.common.Sequence;
 import pl.spring.demo.dao.BookDao;
 import pl.spring.demo.entity.BookEntity;
 import pl.spring.demo.to.AuthorTo;
-import pl.spring.demo.to.BookTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import pl.spring.demo.common.BookMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
