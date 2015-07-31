@@ -64,11 +64,6 @@ public class BookDaoImpl implements BookDao {
 	@NullableId
 	public BookEntity save(BookEntity book) {
 		ALL_BOOKS.add(book);
-		
-		// TEST
-		System.out.println("Exiting method save in class BookDaoImpl");
-		System.out.println("Book id = " + book.getId());
-		
 		return book;
 	}
 
