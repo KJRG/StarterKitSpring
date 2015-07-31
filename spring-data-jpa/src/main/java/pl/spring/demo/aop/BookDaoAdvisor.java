@@ -3,18 +3,16 @@ package pl.spring.demo.aop;
 
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import pl.spring.demo.annotation.NullableId;
 import pl.spring.demo.common.Sequence;
 import pl.spring.demo.dao.impl.BookDaoImpl;
+import pl.spring.demo.entity.BookEntity;
 import pl.spring.demo.exception.BookNotNullIdException;
-import pl.spring.demo.to.BookTo;
 import pl.spring.demo.to.IdAware;
 
 import java.lang.reflect.Method;
 
-@Component
 public class BookDaoAdvisor implements MethodBeforeAdvice {
 
 	@Autowired
@@ -22,19 +20,18 @@ public class BookDaoAdvisor implements MethodBeforeAdvice {
 	
     @Override
     public void before(Method method, Object[] objects, Object o) throws Throwable {
-
         if (hasAnnotation(method, o, NullableId.class)) {
             checkNotNullId(objects[0]);
             setId(objects[0], o);
+            
         }
     }
     
     private void setId(Object bookObject, Object bookDaoImplObject) throws Exception {
-    	if(bookObject instanceof BookTo && bookDaoImplObject instanceof BookDaoImpl) {
+    	if(bookObject instanceof BookEntity && bookDaoImplObject instanceof BookDaoImpl) {
     		BookDaoImpl bookDaoImpl = (BookDaoImpl) bookDaoImplObject;
-//    		long nextId = bookDaoImpl.getSequence().nextValue(bookDaoImpl.findAll());
     		long nextId = sequence.nextValue(bookDaoImpl.findAll());
-    		((BookTo) bookObject).setId(++nextId);
+    		((BookEntity) bookObject).setId(nextId);
     	}
     }
 

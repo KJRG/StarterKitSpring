@@ -32,10 +32,8 @@ public class BookServiceImplTest {
         assertFalse(allBooks.isEmpty());
         assertEquals(6, allBooks.size());
     }
-
     
     @Test
-//  @Ignore
     public void testShouldFindAllBooksByTitle() {
         // given
         final String title = "Opium w rosole";
@@ -48,7 +46,6 @@ public class BookServiceImplTest {
     }
 
     @Test
-//  @Ignore
     public void testShouldFindAllBooksByTitlesPrefix() {
     	// given
     	final String title = "Pan S";
@@ -61,7 +58,6 @@ public class BookServiceImplTest {
     }
 
     @Test
-//  @Ignore
     public void testShouldFindAllBooksByAuthorsFullFirstName() {
     	// given
     	final String author = "Jan";
@@ -74,7 +70,6 @@ public class BookServiceImplTest {
     }
 
     @Test
-//  @Ignore
     public void testShouldFindAllBooksByAuthorsFirstNamesPrefix() {
     	// given
     	final String author = "Niz";
@@ -87,7 +82,6 @@ public class BookServiceImplTest {
     }
 
     @Test
-//  @Ignore
     public void testShouldFindAllBooksByAuthorsFullLastName() {
     	// given
     	final String author = "Fredro";
@@ -100,7 +94,6 @@ public class BookServiceImplTest {
     }
 
     @Test
-//  @Ignore
     public void testShouldFindAllBooksByAuthorsLastNamesPrefix() {
     	// given
     	final String author = "Fredro";
@@ -114,9 +107,10 @@ public class BookServiceImplTest {
 
     @Test(expected = BookNotNullIdException.class)
     public void testShouldThrowBookNotNullIdException() {
-        // given
-        final BookTo bookToSave = new BookTo();
-        bookToSave.setId(22L);
+    	// given
+//        final BookTo bookToSave = new BookTo();
+//        bookToSave.setId(22L);
+    	final BookTo bookToSave = new BookTo(22L, "title", "author author");
         // when
         bookService.saveBook(bookToSave);
         // then
@@ -124,22 +118,19 @@ public class BookServiceImplTest {
     }
 
     @Test
-//  @Ignore
-    public void testZShouldSaveBook() {
+    public void testZShouldSaveBooks() {
     	// given
     	BookTo bookToSave1 = new BookTo(null, "title", "author author");
     	BookTo bookToSave2 = new BookTo(null, "title", "author author");
     	BookTo bookToSave3 = new BookTo(null, "title", "author author");
-    	
     	// when
     	BookTo result1 = bookService.saveBook(bookToSave1);
     	BookTo result2 = bookService.saveBook(bookToSave2);
     	BookTo result3 = bookService.saveBook(bookToSave3);
-    	
     	// then
-    	assertNotNull(bookToSave1.getId());
-    	assertNotNull(bookToSave2.getId());
-    	assertNotNull(bookToSave3.getId());
+    	assertNotNull(result1.getId());
+    	assertNotNull(result2.getId());
+    	assertNotNull(result3.getId());
     	assertNotEquals(result1.getId(), result2.getId());
     	assertNotEquals(result2.getId(), result3.getId());
     	assertNotEquals(result3.getId(), result1.getId());

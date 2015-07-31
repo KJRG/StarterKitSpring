@@ -13,7 +13,7 @@ import pl.spring.demo.entity.BookEntity;
 
 @Component
 public class BookMapper {
-	public BookTo convertFromBookEntity(BookEntity bookToConvert) {
+	public BookTo convertToBookTo(BookEntity bookToConvert) {
 		BookTo converted = new BookTo();
 		converted.setId(bookToConvert.getId());
 		converted.setTitle(bookToConvert.getTitle());
@@ -33,7 +33,7 @@ public class BookMapper {
 		return converted;
 	}
 
-	public BookEntity convertFromBookTo(BookTo bookToConvert) {
+	public BookEntity convertToBookEntity(BookTo bookToConvert) {
 		BookEntity converted = new BookEntity();
 		converted.setId(bookToConvert.getId());
 		converted.setTitle(bookToConvert.getTitle());

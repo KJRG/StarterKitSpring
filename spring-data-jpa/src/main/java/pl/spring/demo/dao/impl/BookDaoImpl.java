@@ -26,42 +26,34 @@ public class BookDaoImpl implements BookDao {
 	@Autowired
 	private Sequence sequence;
 
-	@Autowired
-	private BookMapper mapper;
-
 	public BookDaoImpl() {
 		addTestBooks();
 	}
 
 	@Override
-	public List<BookTo> findAll() {
-		List<BookTo> allBooks = new ArrayList<>();
-		for (BookEntity be : ALL_BOOKS) {
-			allBooks.add(mapper.convertFromBookEntity(be));
-		}
-		return allBooks;
-		// return new ArrayList<>(ALL_BOOKS);
+	public List<BookEntity> findAll() {
+		 return new ArrayList<>(ALL_BOOKS);
 	}
 
 	@Override
-	public List<BookTo> findBookByTitle(String title) {
-		List<BookTo> booksFoundByTitle = new ArrayList<>();
+	public List<BookEntity> findBookByTitle(String title) {
+		List<BookEntity> booksFoundByTitle = new ArrayList<>();
 		for (BookEntity be : ALL_BOOKS) {
 			if (be.getTitle().toLowerCase().startsWith(title.toLowerCase())) {
-				booksFoundByTitle.add(mapper.convertFromBookEntity(be));
+				booksFoundByTitle.add(be);
 			}
 		}
 		return booksFoundByTitle;
 	}
 
 	@Override
-	public List<BookTo> findBooksByAuthor(String author) {
-		List<BookTo> booksFoundByAuthor = new ArrayList<>();
+	public List<BookEntity> findBooksByAuthor(String author) {
+		List<BookEntity> booksFoundByAuthor = new ArrayList<>();
 		for(BookEntity be : ALL_BOOKS) {
 			for(AuthorTo a : be.getAuthors()) {
 				if(a.getFirstName().toLowerCase().startsWith(author.toLowerCase())
 						|| a.getLastName().toLowerCase().startsWith(author.toLowerCase())) {
-					booksFoundByAuthor.add(mapper.convertFromBookEntity(be));
+					booksFoundByAuthor.add(be);
 				}
 			}
 		}
@@ -70,9 +62,13 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	@NullableId
-	public BookTo save(BookTo book) {
-		// ALL_BOOKS.add(book);
-		ALL_BOOKS.add(mapper.convertFromBookTo(book));
+	public BookEntity save(BookEntity book) {
+		ALL_BOOKS.add(book);
+		
+		// TEST
+		System.out.println("Exiting method save in class BookDaoImpl");
+		System.out.println("Book id = " + book.getId());
+		
 		return book;
 	}
 

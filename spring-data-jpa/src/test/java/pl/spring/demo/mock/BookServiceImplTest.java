@@ -31,15 +31,15 @@ public class BookServiceImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void testShouldSaveBook() {
-        // given
-        BookTo book = new BookTo(null, "title", "author");
-        Mockito.when(bookDao.save(book)).thenReturn(new BookTo(1L, "title", "author"));
-        // when
-        BookTo result = bookService.saveBook(book);
-        // then
-        Mockito.verify(bookDao).save(book);
-        assertEquals(1L, result.getId().longValue());
-    }
+//    @Test
+//    public void testShouldSaveBook() {
+//        // given
+//        BookTo book = new BookTo(null, "title", "author author");
+//        Mockito.when(bookDao.save(book)).thenReturn(new BookTo(1L, "title", "author author"));
+//        // when
+//        BookTo result = bookService.saveBook(book);
+//        // then
+//        Mockito.verify(bookDao).save(book);
+//        assertEquals(1L, result.getId().longValue());
+//    }
 }
