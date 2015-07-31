@@ -1,6 +1,5 @@
 package pl.spring.demo.aop;
 
-
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 
