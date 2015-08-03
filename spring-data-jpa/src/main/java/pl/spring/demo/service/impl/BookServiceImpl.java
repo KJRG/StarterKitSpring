@@ -59,8 +59,4 @@ public class BookServiceImpl implements BookService {
         BookEntity result = bookDao.save(mapper.convertToBookEntity(book));
         return mapper.convertToBookTo(result);
     }
-
-    public void setBookDao(BookDao bookDao) {
-        this.bookDao = bookDao;
-    }
 }

@@ -65,14 +65,6 @@ public class BookDaoImpl implements BookDao {
 		return book;
 	}
 
-	public Sequence getSequence() {
-		return sequence;
-	}
-
-	public void setSequence(Sequence sequence) {
-		this.sequence = sequence;
-	}
-
 	private void addTestBooks() {
 		ALL_BOOKS.add(new BookEntity(1L, "Romeo i Julia",
 				Arrays.asList(new AuthorTo(0L, "Wiliam", "Szekspir"))));
