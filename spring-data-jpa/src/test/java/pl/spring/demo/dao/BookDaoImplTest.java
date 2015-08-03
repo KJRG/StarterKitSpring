@@ -15,8 +15,7 @@ import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.AuthorTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = "file:src/test/resources/pl/spring/demo/service/CommonServiceTest-context.xml")
-@ContextConfiguration(locations = "file:src/main/resources/spring/spring-context.xml")
+@ContextConfiguration(locations = "DaoTest-context.xml")
 public class BookDaoImplTest {
 
 	@Autowired
