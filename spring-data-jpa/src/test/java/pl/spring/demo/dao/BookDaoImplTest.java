@@ -23,7 +23,7 @@ public class BookDaoImplTest {
 	private BookDao bookDao;
 	
 	@Test
-	public void testShouldSaveBookWithId() {
+	public void testShouldSaveBook() {
 		// given
         BookEntity book = new BookEntity(null, "title", Arrays.asList(new AuthorTo(0L, "author", "author")));
         // when

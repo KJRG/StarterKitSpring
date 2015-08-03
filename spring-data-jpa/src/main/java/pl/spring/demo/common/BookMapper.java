@@ -18,17 +18,17 @@ public class BookMapper {
 		converted.setId(bookToConvert.getId());
 		converted.setTitle(bookToConvert.getTitle());
 		
-		String authors = "";
+		StringBuilder authors = new StringBuilder();
 		ListIterator<AuthorTo> iter = bookToConvert.getAuthors().listIterator();
 		
 		while(iter.hasNext()) {
 			AuthorTo a = iter.next();
-			authors = authors.concat(a.getFirstName() + " " + a.getLastName());
+			authors.append(a.getFirstName() + " " + a.getLastName());
 			if(iter.hasNext()) {
-				authors = authors.concat(",");
+				authors.append(",");
 			}
 		}
-		converted.setAuthors(authors);
+		converted.setAuthors(authors.toString());
 		
 		return converted;
 	}
