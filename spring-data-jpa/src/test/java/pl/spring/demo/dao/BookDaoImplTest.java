@@ -30,6 +30,11 @@ public class BookDaoImplTest {
         BookEntity result = bookDao.save(book);
         // then
         assertNotNull(result.getId());
+       /* the test uses context - the BookServiceImpl object
+        * initially has six predefined books added to the collection,
+        * the id of the next saved book should be equal to 7L
+        */
+        assertEquals(7L, result.getId().longValue());
 	}
 
 	@Test(expected = BookNotNullIdException.class)
