@@ -25,7 +25,7 @@ public class BookMapper {
 			AuthorTo a = iter.next();
 			authors = authors.concat(a.getFirstName() + " " + a.getLastName());
 			if(iter.hasNext()) {
-				authors.concat(",");
+				authors = authors.concat(",");
 			}
 		}
 		converted.setAuthors(authors);
