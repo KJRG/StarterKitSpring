@@ -51,6 +51,7 @@ public class BookDaoImpl implements BookDao {
 				if(a.getFirstName().toLowerCase().startsWith(author.toLowerCase())
 						|| a.getLastName().toLowerCase().startsWith(author.toLowerCase())) {
 					booksFoundByAuthor.add(be);
+					continue;
 				}
 			}
 		}
