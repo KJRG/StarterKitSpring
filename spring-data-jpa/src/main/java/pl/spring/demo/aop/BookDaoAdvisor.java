@@ -2,6 +2,7 @@ package pl.spring.demo.aop;
 
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import pl.spring.demo.annotation.NullableId;
 import pl.spring.demo.common.Sequence;
@@ -12,6 +13,7 @@ import pl.spring.demo.to.IdAware;
 
 import java.lang.reflect.Method;
 
+@Component
 public class BookDaoAdvisor implements MethodBeforeAdvice {
 
 	@Autowired
