@@ -14,7 +14,7 @@ import pl.spring.demo.to.BookTo;
 public class BookMapperTest {
 
 	private BookMapper mapper;
-	
+
 	@Before
 	public void setUp() {
 		mapper = new BookMapper();
@@ -32,10 +32,13 @@ public class BookMapperTest {
 		assertEquals(bookToConvert.getTitle(), converted.getTitle());
 		String[] fullNames = converted.getAuthors().split(",");
 		int i = 0;
-		for(String fn : fullNames) {
+		for (String fn : fullNames) {
 			String[] fullName = fn.split(" ");
-			assertEquals(bookToConvert.getAuthors().get(i).getFirstName(), fullName[0]);
-			assertEquals(bookToConvert.getAuthors().get(i).getLastName(), fullName[1]);
+			assertEquals(bookToConvert.getAuthors().get(i).getFirstName(),
+					fullName[0]);
+			assertEquals(bookToConvert.getAuthors().get(i).getLastName(),
+					fullName[1]);
+			i++;
 		}
 	}
 
@@ -50,10 +53,58 @@ public class BookMapperTest {
 		assertEquals(bookToConvert.getTitle(), converted.getTitle());
 		String[] fullNames = bookToConvert.getAuthors().split(",");
 		int i = 0;
-		for(String fn : fullNames) {
+		for (String fn : fullNames) {
 			String[] fullName = fn.split(" ");
-			assertEquals(fullName[0], converted.getAuthors().get(i).getFirstName());
-			assertEquals(fullName[1], converted.getAuthors().get(i).getLastName());
+			assertEquals(fullName[0],
+					converted.getAuthors().get(i).getFirstName());
+			assertEquals(fullName[1],
+					converted.getAuthors().get(i).getLastName());
+			i++;
+		}
+	}
+
+	@Test
+	public void shouldConvertBookEntityToBookToWithMultipleAuthors() {
+		// given
+		BookEntity bookToConvert = new BookEntity(1L, "title",
+				Arrays.asList(new AuthorTo(1L, "author1", "author1"),
+						new AuthorTo(2L, "author2", "author2")));
+		// when
+		BookTo converted = mapper.convertToBookTo(bookToConvert);
+		// then
+		assertEquals(bookToConvert.getId(), converted.getId());
+		assertEquals(bookToConvert.getTitle(), converted.getTitle());
+		String[] fullNames = converted.getAuthors().split(",");
+		int i = 0;
+		for (String fn : fullNames) {
+			String[] fullName = fn.split(" ");
+			assertEquals(bookToConvert.getAuthors().get(i).getFirstName(),
+					fullName[0]);
+			assertEquals(bookToConvert.getAuthors().get(i).getLastName(),
+					fullName[1]);
+			i++;
+		}
+	}
+
+	@Test
+	public void shouldConvertBookToToBookEntityWithMultipleAuthors() {
+		// given
+		BookTo bookToConvert = new BookTo(1L, "title",
+				"author1 author1,author2 author2");
+		// when
+		BookEntity converted = mapper.convertToBookEntity(bookToConvert);
+		// then
+		assertEquals(bookToConvert.getId(), converted.getId());
+		assertEquals(bookToConvert.getTitle(), converted.getTitle());
+		String[] fullNames = bookToConvert.getAuthors().split(",");
+		int i = 0;
+		for (String fn : fullNames) {
+			String[] fullName = fn.split(" ");
+			assertEquals(fullName[0],
+					converted.getAuthors().get(i).getFirstName());
+			assertEquals(fullName[1],
+					converted.getAuthors().get(i).getLastName());
+			i++;
 		}
 	}
 
