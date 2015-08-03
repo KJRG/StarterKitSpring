@@ -110,8 +110,6 @@ public class BookServiceImplTest {
     @Test(expected = BookNotNullIdException.class)
     public void testShouldThrowBookNotNullIdException() {
     	// given
-//        final BookTo bookToSave = new BookTo();
-//        bookToSave.setId(22L);
     	final BookTo bookToSave = new BookTo(22L, "title", "author author");
         // when
         bookService.saveBook(bookToSave);
