@@ -1,25 +1,19 @@
 package pl.spring.demo.service;
 
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.BookTo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookServiceImplTest {
 
     @Autowired
@@ -115,24 +109,5 @@ public class BookServiceImplTest {
         bookService.saveBook(bookToSave);
         // then
         fail("test should throw BookNotNullIdException");
-    }
-
-    @Test
-    public void testZShouldSaveBooks() {
-    	// given
-    	List<BookTo> booksToSave = new ArrayList<>();
-    	Set<Long> booksIds = new HashSet<>();
-    	for(int i = 0; i < 3; i++) {
-    		booksToSave.add(new BookTo(null, "title", "author author"));
-    	}
-    	// when
-    	for(BookTo bt : booksToSave) {
-    		bookService.saveBook(bt);
-    	}
-    	// then
-    	for(BookTo bt : booksToSave) {
-    		assertNotNull(bt);
-    		booksIds.add(bt.getId());
-    	}
     }
 }
