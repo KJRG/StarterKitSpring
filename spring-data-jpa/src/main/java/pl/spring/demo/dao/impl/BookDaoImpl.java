@@ -20,9 +20,6 @@ public class BookDaoImpl implements BookDao {
 
 	private final Set<BookEntity> ALL_BOOKS = new HashSet<>();
 
-	@Autowired
-	private Sequence sequence;
-
 	public BookDaoImpl() {
 		addTestBooks();
 	}
