@@ -22,6 +22,13 @@ public class BookController {
         params.put("books", allBooks);
         return "bookList";
     }
+
+    @RequestMapping(value = "/deleted-book", method = RequestMethod.GET)
+    public String deletedBook(Map<String, Object> params) {
+    	final String removedBoookTitle = "test book title";
+    	params.put("book", removedBoookTitle);
+    	return "bookDeleted";
+    }
     
 //    @RequestMapping(value = "/delete-book/{id}", method = RequestMethod.GET)
 //    public String deleteBook(@PathVariable("id") Long id) {

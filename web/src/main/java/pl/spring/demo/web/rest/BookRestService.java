@@ -37,10 +37,10 @@ public class BookRestService {
 			HttpServletRequest request, HttpServletResponse response) {
 		bookService.deleteBook(id);
 		try {
-			response.sendRedirect("/workshop/books");
+			response.sendRedirect("/workshop/deleted-book");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/books";
+		return "redirect:/deleted-book";
 	}
 }
