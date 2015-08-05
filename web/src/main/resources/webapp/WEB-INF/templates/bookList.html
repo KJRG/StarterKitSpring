@@ -5,8 +5,13 @@
     <title>Lista książek</title>
 </head>
 <body>
-    <div th:each="book : ${books}">
-        <p th:text="${book.title}">title</p>
-    </div>
+	<table>
+	    <tr border="1" th:each="book : ${books}">
+	    	<td><p th:text="${book.id}">id</p></td>
+	    	<td><p th:text="${book.title}">title</p></td>
+	    	<td><p th:text="${book.authors}">authors</p></td>
+	    	<td><button>Delete</button></td>
+	    </tr>
+    </table>
 </body>
 </html>
