@@ -11,7 +11,7 @@
 	    	<td><p th:text="${book.title}">title</p></td>
 	    	<td><p th:text="${book.authors}">authors</p></td>
 	    	<td>
-	    		<form th:action="@{/delete-book/} + ${book.id}" method="get">
+	    		<form th:action="@{/delete-book/} + ${book.id}" method="post">
 	    			<input type="hidden" th:value="${book.id}"/>
 	    			<button type="submit">Delete</button>
 	    		</form>

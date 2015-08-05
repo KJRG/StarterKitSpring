@@ -32,12 +32,21 @@ public class BookRestService {
 		return bookService.saveBook(book);
 	}
 
-	@RequestMapping(value = "/delete-book/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete-book/{id}", method = RequestMethod.POST)
 	public String deleteBook(@PathVariable("id") Long id,
 			HttpServletRequest request, HttpServletResponse response) {
+		String deletedBookTitle = "";
+		for(BookTo book : bookService.findAllBooks()) {
+			if(id == book.getId()) {
+				deletedBookTitle = book.getTitle();
+				break;
+			}
+		}
+		
 		bookService.deleteBook(id);
+		
 		try {
-			response.sendRedirect("/workshop/deleted-book");
+			response.sendRedirect("/workshop/deleted-book/" + deletedBookTitle);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

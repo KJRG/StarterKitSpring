@@ -13,26 +13,26 @@ import java.util.Map;
 
 @Controller
 public class BookController {
-    @Autowired
-    private BookService bookService;
+	@Autowired
+	private BookService bookService;
 
-    @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public String bookList(Map<String, Object> params) {
-        final List<BookTo> allBooks = bookService.findAllBooks();
-        params.put("books", allBooks);
-        return "bookList";
-    }
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public String bookList(Map<String, Object> params) {
+		final List<BookTo> allBooks = bookService.findAllBooks();
+		params.put("books", allBooks);
+		return "bookList";
+	}
 
-    @RequestMapping(value = "/deleted-book", method = RequestMethod.GET)
-    public String deletedBook(Map<String, Object> params) {
-    	final String removedBoookTitle = "test book title";
-    	params.put("book", removedBoookTitle);
-    	return "bookDeleted";
-    }
-    
-//    @RequestMapping(value = "/delete-book/{id}", method = RequestMethod.GET)
-//    public String deleteBook(@PathVariable("id") Long id) {
-//    	bookService.deleteBook(id);
-//    	return "redirect:/books";
-//    }
+	@RequestMapping(value = "/deleted-book/{title}", method = RequestMethod.GET)
+	public String deletedBook(@PathVariable("title") String title,
+			Map<String, Object> params) {
+		params.put("book", title);
+		return "bookDeleted";
+	}
+
+	// @RequestMapping(value = "/delete-book/{id}", method = RequestMethod.GET)
+	// public String deleteBook(@PathVariable("id") Long id) {
+	// bookService.deleteBook(id);
+	// return "redirect:/books";
+	// }
 }
