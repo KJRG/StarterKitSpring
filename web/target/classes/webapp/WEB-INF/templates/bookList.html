@@ -6,22 +6,26 @@
     <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
-	<table>
-		<th>Id</th>
-		<th>Title</th>
-		<th>Authors</th>
-		<th>Delete</th>
-	    <tr border="1" th:each="book : ${books}">
-	    	<td><p th:text="${book.id}">id</p></td>
-	    	<td><p th:text="${book.title}">title</p></td>
-	    	<td><p th:text="${book.authors}">authors</p></td>
-	    	<td>
-	    		<form th:action="@{/delete-book/} + ${book.id}" method="post">
-	    			<input type="hidden" th:value="${book.id}"/>
-	    			<button type="submit">Delete</button>
-	    		</form>
-	    	</td>
-	    </tr>
-    </table>
+	<div id="a">
+		<div id="b">
+			<table>
+				<th>Id</th>
+				<th>Tytuł</th>
+				<th>Autorzy</th>
+				<th>Akcja</th>
+			    <tr border="1" th:each="book : ${books}">
+			    	<td><p th:text="${book.id}">id</p></td>
+			    	<td><p th:text="${book.title}">title</p></td>
+			    	<td><p th:text="${book.authors}">authors</p></td>
+			    	<td>
+			    		<form th:action="@{/delete-book/} + ${book.id}" method="post">
+			    			<input type="hidden" th:value="${book.id}"/>
+			    			<button type="submit">Usuń</button>
+			    		</form>
+			    	</td>
+			    </tr>
+		    </table>
+		</div>
+	</div>
 </body>
 </html>

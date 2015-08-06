@@ -3,8 +3,16 @@
 }
 
 table {
+	margin: auto;
 	border-collapse: collapse;
 	font-family: Arial;
+}
+
+tr:nth-child(even) { background: #67C790 }
+tr:nth-child(odd) { background: #77C780 }
+
+th {
+	background: #00C377;
 }
 
 th, td {
@@ -28,17 +36,28 @@ html, body, #a {
 #b {
 	display: table-cell;
 	margin: 0;
-	padding: 0;
+	padding: 2px;
 	
 	text-align: center;
 	vertical-align: middle;
 }
 
 #content {
-	border: 5px solid #00C377;
+	border: 1px solid #000000;
+	padding: 5px;
 	margin: auto;
 	width: 500px;
 	vertical-align: middle;
 	background-color: #00C377;
 	font-family: Arial;
+}
+
+a.button {
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
+	
+	text-decoration: none;
+	color: initial;
+	border: 5px solid;
 }
