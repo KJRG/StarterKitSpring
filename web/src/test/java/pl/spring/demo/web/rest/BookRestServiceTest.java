@@ -92,10 +92,12 @@ public class BookRestServiceTest {
     public void testShouldCallBookServiceOnDelete() throws Exception {
     	// given
     	Long bookId = 1L;
-    	Mockito.doNothing().when(bookService).deleteBook(bookId);
+    	Mockito.when(bookService.deleteBook(bookId)).thenReturn(new BookTo());
     	
     	// when
-    	ResultActions response = this.mockMvc.perform(delete("/delete-book/" + bookId));
+    	ResultActions response = this.mockMvc.perform(delete("/delete-book/" + bookId)
+    		.accept(MediaType.APPLICATION_JSON)
+    		.contentType(MediaType.APPLICATION_JSON));
     	
     	// then
     	Mockito.verify(bookService).deleteBook(bookId);
