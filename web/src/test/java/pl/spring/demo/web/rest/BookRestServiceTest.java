@@ -23,8 +23,10 @@ import java.util.Arrays;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -84,5 +86,19 @@ public class BookRestServiceTest {
                 .content(json.getBytes()));
         // then
         response.andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testShouldCallBookServiceOnDelete() throws Exception {
+    	// given
+    	Long bookId = 1L;
+    	Mockito.doNothing().when(bookService).deleteBook(bookId);
+    	
+    	// when
+    	ResultActions response = this.mockMvc.perform(delete("/delete-book/" + bookId));
+    	
+    	// then
+    	Mockito.verify(bookService).deleteBook(bookId);
+    	response.andExpect(status().isOk());
     }
 }

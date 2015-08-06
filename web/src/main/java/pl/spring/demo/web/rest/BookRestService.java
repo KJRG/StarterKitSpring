@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
- @ResponseBody
+@ResponseBody
 public class BookRestService {
 
 	@Autowired
@@ -32,24 +32,19 @@ public class BookRestService {
 		return bookService.saveBook(book);
 	}
 
-	@RequestMapping(value = "/delete-book/{id}", method = RequestMethod.POST)
-	public String deleteBook(@PathVariable("id") Long id,
+	@RequestMapping(value = "/delete-book/{id}", method = RequestMethod.DELETE)
+	public BookTo deleteBook(@PathVariable("id") Long id,
 			HttpServletRequest request, HttpServletResponse response) {
-		String deletedBookTitle = "";
+		BookTo deletedBook = null;
 		for(BookTo book : bookService.findAllBooks()) {
 			if(id == book.getId()) {
-				deletedBookTitle = book.getTitle();
+				deletedBook = book;
 				break;
 			}
 		}
 		
 		bookService.deleteBook(id);
 		
-		try {
-			response.sendRedirect("/workshop/deleted-book/" + deletedBookTitle);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "redirect:/deleted-book";
+		return deletedBook;
 	}
 }
