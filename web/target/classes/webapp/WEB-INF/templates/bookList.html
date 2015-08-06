@@ -3,9 +3,14 @@
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>Lista książek</title>
+    <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
 	<table>
+		<th>Id</th>
+		<th>Title</th>
+		<th>Authors</th>
+		<th>Delete</th>
 	    <tr border="1" th:each="book : ${books}">
 	    	<td><p th:text="${book.id}">id</p></td>
 	    	<td><p th:text="${book.title}">title</p></td>

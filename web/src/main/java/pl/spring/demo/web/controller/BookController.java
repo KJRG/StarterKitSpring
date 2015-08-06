@@ -23,16 +23,10 @@ public class BookController {
 		return "bookList";
 	}
 
-	@RequestMapping(value = "/deleted-book/{title}", method = RequestMethod.GET)
-	public String deletedBook(@PathVariable("title") String title,
-			Map<String, Object> params) {
-		params.put("book", title);
+	 @RequestMapping(value = "/delete-book/{id}", method = RequestMethod.POST)
+	 public String deleteBook(@PathVariable("id") Long id, Map<String, Object> params) {
+		bookService.deleteBook(id);
+		params.put("book", id.toString());
 		return "bookDeleted";
-	}
-
-	// @RequestMapping(value = "/delete-book/{id}", method = RequestMethod.GET)
-	// public String deleteBook(@PathVariable("id") Long id) {
-	// bookService.deleteBook(id);
-	// return "redirect:/books";
-	// }
+	 }
 }
