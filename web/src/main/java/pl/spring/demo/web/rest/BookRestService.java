@@ -19,32 +19,19 @@ public class BookRestService {
 	@Autowired
 	private BookService bookService;
 
-//	@ResponseBody
 	@RequestMapping(value = "/books-by-title", method = RequestMethod.GET)
 	public List<BookTo> findBooksByTitle(
 			@RequestParam("titlePrefix") String titlePrefix) {
 		return bookService.findBooksByTitle(titlePrefix);
 	}
 
-//	@ResponseBody
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
 	public BookTo saveBook(@RequestBody BookTo book) {
 		return bookService.saveBook(book);
 	}
 
 	@RequestMapping(value = "/delete-book/{id}", method = RequestMethod.DELETE)
-	public BookTo deleteBook(@PathVariable("id") Long id,
-			HttpServletRequest request, HttpServletResponse response) {
-		BookTo deletedBook = null;
-		for(BookTo book : bookService.findAllBooks()) {
-			if(id == book.getId()) {
-				deletedBook = book;
-				break;
-			}
-		}
-		
-		bookService.deleteBook(id);
-		
-		return deletedBook;
+	public BookTo deleteBook(@PathVariable("id") Long id) {
+		return bookService.deleteBook(id);
 	}
 }

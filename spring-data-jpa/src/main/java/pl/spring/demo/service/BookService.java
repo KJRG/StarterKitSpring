@@ -11,5 +11,5 @@ public interface BookService {
     List<BookTo> findBooksByAuthor(String author);
 
     BookTo saveBook(BookTo book);
-    void deleteBook(Long id);
+    BookTo deleteBook(Long id);
 }
