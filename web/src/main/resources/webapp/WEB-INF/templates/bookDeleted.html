@@ -6,9 +6,13 @@
     <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
+	<header id="menubar">
+		<a href="/workshop/home">Strona główna</a>
+		<a href="/workshop/books">Książki</a>
+	</header>
 	<div id="a">
 		<div id="b">
-			<div id="content">
+			<div id="message-content">
 				<p th:text="'Książka o tytule ' + ${book} + ' została usunięta'">Usunieto ksiazke</p>
 				<a href="/workshop/books/"><button>Powrót</button></a>
 			</div>

@@ -6,6 +6,12 @@
     <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
-    <p class="sample" th:inline="text">[[${book.title}]]</p>
+	<header id="menubar">
+		<a href="/workshop/home">Strona główna</a>
+		<a href="/workshop/books">Książki</a>
+	</header>
+	<div id="content">
+    	<p class="sample" th:inline="text">[[${book.title}]]</p>
+	</div>
 </body>
 </html>
