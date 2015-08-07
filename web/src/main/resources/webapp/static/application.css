@@ -6,17 +6,31 @@ table {
 	margin: auto;
 	border-collapse: collapse;
 	border-style: hidden;
+	border-spacing: 0;
 	font-family: Arial;
 }
 
-/*tr:nth-child(even) { background: #67C790 }*/
-/*tr:nth-child(odd) { background: #77C780 }*/
+table.tab > tbody > tr:last-child > td:last-child {
+	border-radius: 0 0 5px 0;
+}
+
+table.tab > tbody > tr:last-child > td:first-child {
+	border-radius: 0 0 0 5px;
+}
+
 tr:nth-child(even) { background: #D9ECC9 }
 tr:nth-child(odd) { background: #C1DFB2 }
 
 th {
-	/*background: #00C377;*/
 	background: #33E1AA;
+}
+
+th:first-child {
+	border-radius: 5px 0 0 0;
+}
+
+th:last-child {
+	border-radius: 0 5px 0 0;
 }
 
 th, td {
@@ -25,14 +39,12 @@ th, td {
 	text-align: left;
 }
 
-html, body, #a {
+html, body, #outer {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	width: 100%;
-	/*background-color: #24B731;*/
 	background-color: #24C151;
-	/*background-color: #99FFCC;*/
 }
 
 #menubar {
@@ -58,11 +70,11 @@ html, body, #a {
 	padding-right: 10px;
 }
 
-#a {
+#outer {
 	display: table;
 }
 
-#b {
+#inner {
 	display: table-cell;
 	margin: 0;
 	padding: 10px;
@@ -79,14 +91,13 @@ html, body, #a {
 }
 
 #message-content {
-	border: 1px solid #000000;
+	border: 1px solid green;
 	padding: 5px;
 	margin: auto;
 	width: 500px;
 	vertical-align: middle;
 	border-radius: 15px;
-	/*background-color: #00C377;*/
-	background-color: #49FDC2;
+	background-color: #D9ECC9;
 	font-family: Arial;
 }
 
