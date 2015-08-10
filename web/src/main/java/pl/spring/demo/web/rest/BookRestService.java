@@ -6,11 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
 
-import java.io.IOException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @ResponseBody

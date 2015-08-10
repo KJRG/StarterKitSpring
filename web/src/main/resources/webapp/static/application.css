@@ -70,6 +70,10 @@ html, body, #outer {
 	padding-right: 10px;
 }
 
+#menubar a:hover {
+	color: white;
+}
+
 #outer {
 	display: table;
 }
