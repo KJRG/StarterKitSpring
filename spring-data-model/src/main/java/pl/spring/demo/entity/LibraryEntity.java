@@ -9,14 +9,11 @@ import java.util.HashSet;
 public class LibraryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name="LIBRARY_ID")
 	private Long id;
 	@Column(nullable = false, length = 50)
 	private String name;
 	
-//	@OneToMany
-//	@Column(name = "library_id")
-	@OneToMany(mappedBy = "library")
+	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL)
 	private Set<BookEntity> books = new HashSet<>();
 	
 	//for hibernate
