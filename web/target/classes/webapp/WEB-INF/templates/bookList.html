@@ -6,7 +6,10 @@
 </head>
 <body>
     <div th:each="book : ${books}">
+        <p th:text="${book.id}">id</p>
         <p th:text="${book.title}">title</p>
+        <p th:text="${book.authors}">authors</p>
+        <p th:text="${book.libraryId}">libraryId</p>
     </div>
 </body>
 </html>

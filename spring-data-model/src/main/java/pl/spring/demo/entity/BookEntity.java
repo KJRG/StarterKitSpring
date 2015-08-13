@@ -20,6 +20,11 @@ public class BookEntity implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false)}
     )
     private Set<AuthorEntity> authors = new HashSet<>();
+    
+//    @JoinColumn(name = "library_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "library_id", referencedColumnName = "id", nullable = false)
+    private LibraryEntity library;
 
     // for hibernate
     protected BookEntity() {
@@ -52,5 +57,9 @@ public class BookEntity implements Serializable {
 
     public void setAuthors(Set<AuthorEntity> authors) {
         this.authors = authors;
+    }
+    
+    public Long getLibraryId() {
+    	return library.getId();
     }
 }
