@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/main/resources/import.sql=UTF-8
+encoding//src/test/java/pl/spring/demo/dao/LibraryDaoImplTest.java=UTF-8
 encoding//src/test/java/pl/spring/demo/repository/LibraryRepositoryTest.java=UTF-8
