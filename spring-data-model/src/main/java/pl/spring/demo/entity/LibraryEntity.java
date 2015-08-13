@@ -13,7 +13,7 @@ public class LibraryEntity {
 	@Column(nullable = false, length = 50)
 	private String name;
 	
-	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "library", cascade = CascadeType.REMOVE)
 	private Set<BookEntity> books = new HashSet<>();
 	
 	//for hibernate

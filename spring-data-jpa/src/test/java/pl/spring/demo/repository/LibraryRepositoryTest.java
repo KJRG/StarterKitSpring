@@ -19,6 +19,9 @@ public class LibraryRepositoryTest {
 
 	@Autowired
 	private LibraryRepository libraryRepository;
+
+	@Autowired
+	private BookRepository bookRepository;
 	
 	@Test
 	public void shouldFindLibraryByName() {
@@ -55,4 +58,15 @@ public class LibraryRepositoryTest {
 		}
 	}
 
+	@Test
+	public void testShouldDeleteAllBooksAssignedToLibrary() {
+		//given
+		Long libraryId = 10L;
+		Long bookCountBeforeDeletingLibrary = bookRepository.count();
+		//when
+		libraryRepository.delete(libraryId);
+		Long bookCountAfterDeletingLibrary = bookRepository.count();
+		//then
+		assertTrue(bookCountAfterDeletingLibrary < bookCountBeforeDeletingLibrary);
+	}
 }
