@@ -24,7 +24,7 @@ public class LibraryRepositoryTest {
 	private BookRepository bookRepository;
 	
 	@Test
-	public void shouldFindLibraryByName() {
+	public void testShouldFindLibraryByName() {
 		//given
 		String name = "biblioteka wroc";
 		//when
@@ -36,7 +36,7 @@ public class LibraryRepositoryTest {
 	}
 
 	@Test
-	public void shouldFindLibraryByPrefixOfMultipleLibrariesNames() {
+	public void testShouldFindLibraryByPrefixOfMultipleLibrariesNames() {
 		//given
 		String prefix = "bibl";
 		String name = "Biblioteka Wrocławska";
@@ -53,9 +53,7 @@ public class LibraryRepositoryTest {
 				break;
 			}
 		}
-		if(!libraryFound) {
-			fail("Library not found.");
-		}
+		assertTrue(libraryFound);
 	}
 
 	@Test

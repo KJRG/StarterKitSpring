@@ -51,9 +51,7 @@ public class LibraryDaoImplTest {
 				break;
 			}
 		}
-		if(!libraryFound) {
-			fail("Library not found.");
-		}
+		assertTrue(libraryFound);
 	}
 
 }
