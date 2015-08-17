@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.BooleanBuilder;
 
 import pl.spring.demo.criteria.BookSearchCriteria;
 import pl.spring.demo.entity.BookEntity;
@@ -20,27 +21,48 @@ public class BookSearchRepositoryImpl implements CustomBookSearchRepository {
 	@Override
 	public List<BookEntity> findBookByCriteria(BookSearchCriteria criteria) {
 		QBookEntity entity = QBookEntity.bookEntity;
+		BooleanBuilder builder = new BooleanBuilder(),
+				doesAuthorMatch = new BooleanBuilder();
 		JPQLQuery query = new JPAQuery(entityManager);
-		
+
 		query = query.from(entity);
-		
-		if(criteria.getTitle() != null) {
-//			query = query.where(entity.title.eq(criteria.getTitle()));
-			query = query.where(entity.title.toLowerCase().startsWith(criteria.getTitle().toLowerCase()));
+
+		if (criteria.getTitle() != null) {
+			builder.and(entity.title.startsWithIgnoreCase(criteria.getTitle()));
 		}
 
-//		if(criteria.getAuthor() != null) {
-//			query = query.where(entity.authors.any().);
-//		}
-		
-		if(criteria.getLibraryName() != null) {
-//			query = query.where(entity.library.name.eq(criteria.getLibraryName()));
-			query = query.where(entity.library.name.toLowerCase().startsWith(criteria.getLibraryName().toLowerCase()));
+		if (criteria.getAuthor() != null) {
+			String[] authors = criteria.getAuthor().split(",");
+
+			for (String author : authors) {
+				String[] fullName = author.split(" ");
+
+				if (fullName.length == 1) {
+					doesAuthorMatch.or(entity.authors.any().firstName
+							.startsWithIgnoreCase(fullName[0]));
+					doesAuthorMatch.or(entity.authors.any().lastName
+							.startsWithIgnoreCase(fullName[0]));
+					continue;
+				}
+
+				if (fullName.length == 2) {
+					doesAuthorMatch.or(entity.authors.any().firstName
+							.startsWithIgnoreCase(fullName[0]));
+					doesAuthorMatch.or(entity.authors.any().lastName
+							.startsWithIgnoreCase(fullName[1]));
+					continue;
+				}
+			}
+
+			builder.and(doesAuthorMatch);
 		}
 
-		List<BookEntity> rows = query.list(entity);
-		
-		return rows;
+		if (criteria.getLibraryName() != null) {
+			builder.and(entity.library.name
+					.startsWithIgnoreCase(criteria.getLibraryName()));
+		}
+
+		return query.where(builder).list(entity);
 	}
 
 }
