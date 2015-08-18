@@ -1,4 +1,4 @@
-package pl.spring.demo.repository;
+package pl.spring.demo.service;
 
 import static org.junit.Assert.*;
 
@@ -12,14 +12,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.spring.demo.entity.LibraryEntity;
+import pl.spring.demo.repository.BookRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "CommonRepositoryTest-context.xml")
-public class LibraryRepositoryTest {
+@ContextConfiguration(locations = "CommonServiceTest-context.xml")
+public class LibraryServiceTest {
 
 	@Autowired
-	private LibraryRepository libraryRepository;
-
+	private LibraryService libraryService;
+	
 	@Autowired
 	private BookRepository bookRepository;
 	
@@ -28,7 +29,7 @@ public class LibraryRepositoryTest {
 		//given
 		String name = "biblioteka wroc";
 		//when
-		List<LibraryEntity> libraryEntities = libraryRepository.findLibraryByName(name);
+		List<LibraryEntity> libraryEntities = libraryService.findLibraryByName(name);
 		//then
 		assertNotNull(libraryEntities);
 		assertFalse(libraryEntities.isEmpty());
@@ -42,7 +43,7 @@ public class LibraryRepositoryTest {
 		String name = "Biblioteka Wrocławska";
 		Boolean libraryFound = false;
 		//when
-		List<LibraryEntity> libraryEntities = libraryRepository.findLibraryByName(prefix);
+		List<LibraryEntity> libraryEntities = libraryService.findLibraryByName(prefix);
 		ListIterator<LibraryEntity> iter = libraryEntities.listIterator();
 		//then
 		assertNotNull(libraryEntities);
@@ -62,7 +63,7 @@ public class LibraryRepositoryTest {
 		Long libraryId = 13L;
 		Long bookCountBeforeDeletingLibrary = bookRepository.count();
 		//when
-		libraryRepository.delete(libraryId);
+		libraryService.deleteLibrary(libraryId);
 		Long bookCountAfterDeletingLibrary = bookRepository.count();
 		//then
 		assertTrue(bookCountAfterDeletingLibrary < bookCountBeforeDeletingLibrary);

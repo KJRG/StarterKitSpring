@@ -18,6 +18,7 @@ public class LibraryServiceImpl implements LibraryService {
 	private LibraryRepository libraryRepository;
 
 	@Override
+	@Transactional(readOnly = false)
 	public void deleteLibrary(Long id) {
 		libraryRepository.delete(id);
 	}
