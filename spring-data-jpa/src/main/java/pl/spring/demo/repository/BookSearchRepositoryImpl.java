@@ -32,28 +32,10 @@ public class BookSearchRepositoryImpl implements CustomBookSearchRepository {
 		}
 
 		if (criteria.getAuthor() != null) {
-			String[] authors = criteria.getAuthor().split(",");
-
-			for (String author : authors) {
-				String[] fullName = author.split(" ");
-
-				if (fullName.length == 1) {
-					doesAuthorMatch.or(entity.authors.any().firstName
-							.startsWithIgnoreCase(fullName[0]));
-					doesAuthorMatch.or(entity.authors.any().lastName
-							.startsWithIgnoreCase(fullName[0]));
-					continue;
-				}
-
-				if (fullName.length == 2) {
-					doesAuthorMatch.or(entity.authors.any().firstName
-							.startsWithIgnoreCase(fullName[0]));
-					doesAuthorMatch.or(entity.authors.any().lastName
-							.startsWithIgnoreCase(fullName[1]));
-					continue;
-				}
-			}
-
+			doesAuthorMatch.or(entity.authors.any().firstName
+					.startsWithIgnoreCase(criteria.getAuthor()));					
+			doesAuthorMatch.or(entity.authors.any().lastName
+					.startsWithIgnoreCase(criteria.getAuthor()));					
 			builder.and(doesAuthorMatch);
 		}
 

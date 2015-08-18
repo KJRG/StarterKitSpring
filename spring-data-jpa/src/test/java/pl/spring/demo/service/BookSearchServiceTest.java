@@ -30,7 +30,7 @@ public class BookSearchServiceTest {
 		//then
 		assertNotNull(allBooks);
 		assertFalse(allBooks.isEmpty());
-		assertEquals(8, allBooks.size());
+		assertEquals(9, allBooks.size());
 	}
 
 	@Test
@@ -54,25 +54,13 @@ public class BookSearchServiceTest {
 		//then
 		assertNotNull(books);
 		assertFalse(books.isEmpty());
-		assertEquals(2, books.size());
+		assertEquals(3, books.size());
 	}
 
 	@Test
 	public void testShouldFindBooksOnlyByAuthorsLastName() {
 		//given
 		BookSearchCriteria criteria = new BookSearchCriteria(null, "now", null);
-		//when
-		List<BookTo> books = bookSearchServiceImpl.findBookByCriteria(criteria);
-		//then
-		assertNotNull(books);
-		assertFalse(books.isEmpty());
-		assertEquals(1, books.size());
-	}
-
-	@Test
-	public void testShouldFindBooksOnlyByAuthorsFullName() {
-		//given
-		BookSearchCriteria criteria = new BookSearchCriteria(null, "Zbigniew Nowak", null);
 		//when
 		List<BookTo> books = bookSearchServiceImpl.findBookByCriteria(criteria);
 		//then
@@ -120,7 +108,7 @@ public class BookSearchServiceTest {
 	@Test
 	public void testShouldFindBooksByAuthorsNameAndLibraryName() {
 		//given
-		BookSearchCriteria criteria = new BookSearchCriteria(null, "Stephen King", "Biblioteka Wrocławska");
+		BookSearchCriteria criteria = new BookSearchCriteria(null, "King", "Biblioteka Wrocławska");
 		//when
 		List<BookTo> books = bookSearchServiceImpl.findBookByCriteria(criteria);
 		//then
