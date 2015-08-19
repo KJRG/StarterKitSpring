@@ -69,6 +69,6 @@ public class LibraryRepositoryTest {
 		libraryRepository.delete(libraryId);
 		Long bookCountAfterDeletingLibrary = bookRepository.count();
 		//then
-		assertTrue(bookCountAfterDeletingLibrary < bookCountBeforeDeletingLibrary);
+		assertEquals(1, bookCountBeforeDeletingLibrary - bookCountAfterDeletingLibrary);
 	}
 }
