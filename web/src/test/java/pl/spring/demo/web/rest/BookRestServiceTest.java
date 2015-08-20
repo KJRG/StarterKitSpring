@@ -62,12 +62,11 @@ public class BookRestServiceTest {
 				.thenReturn(Arrays.asList(bookTo1, bookTo2));
 
 		// when
-		ResultActions response = this.mockMvc
-				.perform(get("/books-by-title?titlePrefix=" + bookTitle)
-						.accept(MediaType.APPLICATION_JSON)
-						.contentType(MediaType.APPLICATION_JSON));
-		// then
-		Mockito.verify(bookService).findBooksByTitle(bookTitle);
+        ResultActions response = this.mockMvc.perform(get("/books/books-by-title?titlePrefix=" + bookTitle)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON));
+        // then
+        Mockito.verify(bookService).findBooksByTitle(bookTitle);
 
 		response.andExpect(status().isOk())
 
@@ -87,7 +86,7 @@ public class BookRestServiceTest {
 				"classpath:pl/spring/demo/web/json/bookToSave.json");
 		String json = FileUtils.readFileToString(file);
 		// when
-		ResultActions response = this.mockMvc.perform(post("/book")
+        ResultActions response = this.mockMvc.perform(post("/books/book")
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(json.getBytes()));
