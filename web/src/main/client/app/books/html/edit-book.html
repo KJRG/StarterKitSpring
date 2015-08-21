@@ -1,0 +1,16 @@
+<div>
+    <form novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title">Edytuj dane książki</h3>
+        </div>
+        <div class="modal-body">
+        	<p>Id: {{ book.id }}</p>
+            <p>Tytuł: {{ book.title }}</p>
+        	<input type="text" ng-model="book.title">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="saveBook(book)">Zapisz</button>
+            <button class="btn btn-warning" ng-click="$dismiss()">Anuluj</button>
+        </div>
+    </form>
+</div>

@@ -5,6 +5,15 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.gridOptions = { data: 'books' };
     $scope.prefix = '';
 
+	var editBookById = function (editedBook) {
+		for (var i = 0; i < $scope.books.length; i = i + 1) {
+			if ($scope.books[i].id === editedBook.id) {
+				$scope.books[i].title = angular.copy(editedBook.title);
+				break;
+			}
+		}
+	}
+	
     var removeBookById = function (bookId) {
         for (var i = 0; i < $scope.books.length; i = i + 1) {
             if ($scope.books[i].id === bookId) {
@@ -34,6 +43,20 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
             templateUrl: 'books/html/book-modal.html',
             controller: 'BookModalController',
             size: 'lg'
+        });
+    };
+
+    $scope.editBook = function (book) {
+        bookService.setBook(book);
+        var modalInstance = $modal.open({
+            templateUrl: 'books/html/edit-book.html',
+            controller: 'BookEditController',
+            size: 'lg'
+        });
+        modalInstance.result.then(function () {
+        	var book = bookService.getBook();
+        	editBookById(book);
+        	bookService.saveBook(book);
         });
     };
 

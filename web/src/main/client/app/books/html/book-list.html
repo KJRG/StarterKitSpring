@@ -14,12 +14,16 @@
             <th>Tytuł</th>
             <th>Autorzy</th>
             <th>Usuń</th>
+            <th>Edytuj</th>
         </tr>
         <tr ng-repeat="book in books">
             <td>{{ book.title }}</td>
             <td>{{ book.astring }}</td>
             <td>
                 <button ng-click="deleteBook(book.id)">Usuń</button>
+            </td>
+            <td>
+                <button ng-click="editBook(book)">Edytuj</button>
             </td>
         </tr>
     </table>
