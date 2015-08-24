@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<section>
+	<div flash-message="5000"></div>
+	
+	<p>Podaj imię lub nazwisko autora:</p>
+	<input type="text">
+	
+	<table>
+		<tr>
+			<th>Imię</th>
+			<th>Nazwisko</th>
+		</tr>
+		<tr ng-repeat="author in authors">
+			<td>{{ author.firstName }}</td>
+			<td>{{ author.lastName }}</td>
+		</tr>
+	</table>
+</section>
+</body>
+</html>
