@@ -47,14 +47,17 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     };
 
     $scope.editBook = function (book) {
-        bookService.setBook(book);
-        var modalInstance = $modal.open({
+        $modal.open({
             templateUrl: 'books/html/edit-book.html',
             controller: 'BookEditController',
-            size: 'lg'
-        });
-        modalInstance.result.then(function () {
-        	var book = bookService.getBook();
+            size: 'lg',
+            resolve: {
+            	book: function() {
+            		return angular.copy(book);
+            	}
+            }
+        }).result.then(function (result) {
+        	var book = result;
         	editBookById(book);
         	bookService.saveBook(book);
         });

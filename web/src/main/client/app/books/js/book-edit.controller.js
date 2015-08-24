@@ -1,11 +1,10 @@
-angular.module('app.books').controller('BookEditController', function ($scope, bookService, $modalInstance) {
+angular.module('app.books').controller('BookEditController', function ($scope, $modalInstance, book) {
     'use strict';
 
-    $scope.book = bookService.getBook();
+    $scope.book = book;
     
     $scope.saveBook = function (book) {
-        bookService.setBook(book);
-        $modalInstance.close();
+        $modalInstance.close(book);
     };
     
     $scope.cancel = function () {
