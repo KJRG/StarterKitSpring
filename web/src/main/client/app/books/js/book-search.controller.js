@@ -49,6 +49,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         	bookWithId.title = book.title;
         	$scope.books.push(book);
         	// $scope.books.push(bookWithId);
+        	Flash.create('success', 'Książka została dodana.', 'custom-class');
         });
     };
 
@@ -66,6 +67,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         	var book = result;
         	editBookById(book);
         	bookService.editBookTitle(book);
+        	Flash.create('success', 'Tytuł książki został zmieniony.', 'custom-class');
         });
     };
 
