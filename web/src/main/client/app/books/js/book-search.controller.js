@@ -12,7 +12,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
 				break;
 			}
 		}
-	}
+	};
 	
     var removeBookById = function (bookId) {
         for (var i = 0; i < $scope.books.length; i = i + 1) {
