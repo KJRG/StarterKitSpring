@@ -1,8 +1,31 @@
-<!DOCTYPE html>
-<html>
-<body>
-<section>
-    <p>TODO dialog umożliwiający dodanie i zapisanie nowej książki</p>
-</section>
-</body>
-</html>
+<div>
+	<form name="bookForm">
+		<div class="modal-header">
+			<h3 class="modal-title">Dodaj książkę</h3>
+		</div>
+		<div class="modal-body">
+			<p>Tytuł: {{ book.title }}</p>
+			<input name="title" type="text" ng-model="book.title" ng-required="true">
+			<p>Autorzy:</p>
+			<table>
+				<tr>
+					<th>Imię</th>
+					<th>Nazwisko</th>
+				</tr>
+				<tr ng-repeat="author in book.authors">
+					<td>{{ author.firstName }}</td>
+					<td>{{ author.lastName }}</td>
+				</tr>
+			</table>
+			
+			<input type="text" ng-model="author.firstName">
+			<input type="text" ng-model="author.lastName">
+			<button class="btn btn-primary" ng-click="addAuthor()">Dodaj autora</button>
+			
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" ng-click="addBook()" ng-hide="book.authors.length < 1 || bookForm.title.$invalid">Dodaj książkę</button>
+			<button class="btn btn-warning" ng-click="$dismiss()">Anuluj</button>
+		</div>
+	</form>
+</div>

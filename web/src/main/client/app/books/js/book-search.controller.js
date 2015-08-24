@@ -40,9 +40,15 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
 
     $scope.addBook = function () {
         $modal.open({
-            templateUrl: 'books/html/book-modal.html',
-            controller: 'BookModalController',
+            templateUrl: 'books/html/add-book.html',
+            controller: 'BookAddController',
             size: 'lg'
+        }).result.then(function (result) {
+        	var book = result;
+        	var bookWithId = bookService.saveBook(book);
+        	bookWithId.title = book.title;
+        	$scope.books.push(book);
+        	// $scope.books.push(bookWithId);
         });
     };
 
