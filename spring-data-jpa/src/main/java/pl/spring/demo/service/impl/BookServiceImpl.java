@@ -43,6 +43,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = false)
+    public BookTo editBookTitle(BookTo book) {
+    	BookEntity entity = bookRepository.findOne(book.getId());
+    	entity.setTitle(book.getTitle());
+    	return BookMapper.map(entity);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
     public void deleteBook(long id) {
         bookRepository.delete(id);
     }

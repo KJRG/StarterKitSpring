@@ -39,12 +39,4 @@ public class BookTo {
     public void setAuthors(Set<AuthorTo> authors) {
         this.authors = authors;
     }
-    
-    public String getAstring() {
-    	StringBuilder builder = new StringBuilder();
-    	for(AuthorTo author : authors) {
-    		builder.append(author.getFirstName() + " " + author.getLastName() + " ");
-    	}
-    	return builder.toString();
-    }
 }

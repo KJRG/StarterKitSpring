@@ -28,6 +28,11 @@ public class BookRestService {
         return bookService.saveBook(book);
     }
 
+    @RequestMapping(value = "/edit-book-title", method = RequestMethod.POST)
+    public BookTo editBookTitle(@RequestBody BookTo book) {
+    	return bookService.editBookTitle(book);
+    }
+
     @RequestMapping(value = "/book/{id}", method = RequestMethod.DELETE)
     public void deleteBook(@PathVariable("id") long id) {
         bookService.deleteBook(id);
