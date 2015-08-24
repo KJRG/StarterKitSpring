@@ -8,6 +8,9 @@ angular.module('app.books').factory('bookService', function (bookRestService) {
         saveBook: function(book) {
         	return bookRestService.saveBook(book);
         },
+        editBookTitle: function(book) {
+        	return bookRestService.editBookTitle(book);
+        },
         deleteBook: function (bookId) {
             return bookRestService.deleteBook(bookId);
         }

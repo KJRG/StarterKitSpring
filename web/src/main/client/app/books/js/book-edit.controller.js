@@ -3,11 +3,7 @@ angular.module('app.books').controller('BookEditController', function ($scope, $
 
     $scope.book = book;
     
-    $scope.saveBook = function (book) {
+    $scope.saveBookTitle = function (book) {
         $modalInstance.close(book);
-    };
-    
-    $scope.cancel = function () {
-    	$modalInstance.dismiss('cancel');
     };
 });

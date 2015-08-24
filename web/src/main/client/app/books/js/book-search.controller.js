@@ -59,7 +59,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         }).result.then(function (result) {
         	var book = result;
         	editBookById(book);
-        	bookService.saveBook(book);
+        	bookService.editBookTitle(book);
         });
     };
 
