@@ -44,11 +44,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
             controller: 'BookAddController',
             size: 'lg'
         }).result.then(function (result) {
-        	var book = result;
-        	var bookWithId = bookService.saveBook(book);
-        	bookWithId.title = book.title;
-        	$scope.books.push(book);
-        	// $scope.books.push(bookWithId);
+        	$scope.books.push(result);
         	Flash.create('success', 'Książka została dodana.', 'custom-class');
         });
     };

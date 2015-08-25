@@ -1,4 +1,4 @@
-angular.module('app.books').controller('BookAddController', function ($scope, $modalInstance) {
+angular.module('app.books').controller('BookAddController', function ($scope, $modalInstance, bookService) {
 	'use strict';
 	
 	$scope.book = {
@@ -20,6 +20,8 @@ angular.module('app.books').controller('BookAddController', function ($scope, $m
 	};
 	
 	$scope.addBook = function () {
-		$modalInstance.close($scope.book);
+		bookService.saveBook($scope.book).then(function (response) {
+			$modalInstance.close(response.data);
+		});
 	};
 });
