@@ -4,11 +4,11 @@ angular.module('app.authors').controller('AuthorSearchController', function ($sc
     $scope.authors = [];
     $scope.gridOptions = { data: 'authors' };
 
-	var init = function () {
+	$scope.init = function () {
 		authorService.search().then(function (response) {
 			angular.copy(response.data, $scope.authors);
 		});
     };
 
-	init();
+	$scope.init();
 });
