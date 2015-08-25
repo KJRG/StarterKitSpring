@@ -19,6 +19,26 @@ describe('book controller', function () {
         expect($scope.search).toBeDefined();
     }));
 
+    it('search should call bookService.search', inject(function ($controller, $q, bookService) {
+        //given
+        $controller('BookSearchController', {$scope: $scope});
+        var prefix = 'Jan';
+        $scope.prefix = prefix;
+        var result = {data: [{id: 5, title: 'Test 1', authors: [{id: 7, firstName: 'Jan', lastName: 'Kowalski'}]}] };
+        $scope.books = [{id: 1, title: 'Book 1'}, {id: 2, title: 'Book 2'}];
+        var searchDeferred = $q.defer();
+        spyOn(bookService, 'search').and.returnValue(searchDeferred.promise);
+        
+        // when
+        $scope.search();
+        searchDeferred.resolve(result);
+        $scope.$digest();
+        
+        // then
+        expect(bookService.search).toHaveBeenCalledWith(prefix);
+        expect($scope.books.length).toBe(1);
+    }));
+
     it('delete book should call bookService.deleteBook', inject(function ($controller, $q, bookService, Flash) {
         // given
         $controller('BookSearchController', {$scope: $scope});
