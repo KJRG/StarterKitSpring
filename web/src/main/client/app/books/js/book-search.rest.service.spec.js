@@ -33,7 +33,7 @@ describe('book rest service', function () {
 		httpBackend.expect('GET', '/context.html/rest/books/books-by-title?titlePrefix=' + prefix);
 	}));
 
-	it('rest service should call POST', function () {
+	it('rest service should call POST on adding book', function () {
 		// given
 		var book = {
 			id: 1,
@@ -46,6 +46,34 @@ describe('book rest service', function () {
 
 		// when
 		bookRestService.saveBook(book);
+		httpBackend.flush();
+	});
+
+	it('rest service should call POST on editing book title', function () {
+		// given
+		var book = {
+			id: 1,
+			title: 'test',
+			authors: []
+		};
+		
+		// then
+		httpBackend.expect('POST', '/context.html/rest/books/edit-book-title').respond(book);
+
+		// when
+		bookRestService.editBookTitle(book);
+		httpBackend.flush();
+	});
+
+	it('rest service should call DELETE', function () {
+		// given
+		var bookId = 1;
+		
+		// then
+		httpBackend.expect('DELETE', '/context.html/rest/books/book/' + bookId).respond();
+
+		// when
+		bookRestService.deleteBook(bookId);
 		httpBackend.flush();
 	});
 });
