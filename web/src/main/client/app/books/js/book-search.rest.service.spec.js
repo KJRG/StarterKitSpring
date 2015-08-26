@@ -13,25 +13,18 @@ describe('book rest service', function () {
 		bookRestService = _bookRestService_;
 	}));
 	
-	it('rest service should call GET', inject(function ($q) {
+	it('rest service should call GET', function () {
 		// given
 		var prefix = 'test';
-		var result = {data: [{id: 1, title: 'test1'}, {id: 2, title: 'test2'}]};
-		var getDeferred = $q.defer();
-		httpBackend.when('GET', '/context.html/rest/books/books-by-title?titlePrefix=' + prefix)
-					.respond(getDeferred.promise);
-		
-		// when
-		// var response = bookRestService.search(prefix);
-		bookRestService.search(prefix);
-		httpBackend.flush();
-		getDeferred.resolve(result);
-		scope.$digest();
+		var result = {data: [{id: 1, title: 'test1'}, {id: 2, title: 'test2'}, {id: 3, title: 'test3'}]};
 		
 		// then
-		// expect(response.length).toBe(2);
-		httpBackend.expect('GET', '/context.html/rest/books/books-by-title?titlePrefix=' + prefix);
-	}));
+		httpBackend.expect('GET', '/context.html/rest/books/books-by-title?titlePrefix=' + prefix).respond(result);
+
+		// when
+		bookRestService.search(prefix);
+		httpBackend.flush();
+	});
 
 	it('rest service should call POST on adding book', function () {
 		// given
