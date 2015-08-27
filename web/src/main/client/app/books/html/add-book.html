@@ -1,12 +1,14 @@
 <div>
-	<form name="bookForm">
+	<form novalidate name="bookForm" ng-submit="!bookForm.title.$invalid && book.authors.length > 0 && addBook()">
 		<div class="modal-header">
 			<h3 class="modal-title">Dodaj książkę</h3>
 		</div>
 		<div class="modal-body">
 			<p class="book-add-text">Tytuł: {{ book.title }}</p>
+			<p ng-show="submitted && bookForm.title.$invalid">Podaj tytuł.</p>
 			<input name="title" type="text" ng-model="book.title" ng-required="true">
 			<p class="book-add-text">Autorzy:</p>
+			<p ng-show="submitted && book.authors.length < 1">Książka powinna mieć co najmniej 1 autora.</p>
 			<table>
 				<tr>
 					<th>Imię</th>
@@ -17,14 +19,10 @@
 					<td>{{ author.lastName }}</td>
 				</tr>
 			</table>
-			
-			<input type="text" ng-model="author.firstName">
-			<input type="text" ng-model="author.lastName">
-			<button class="btn btn-primary" ng-click="addAuthor()">Dodaj autora</button>
-			
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-primary" ng-click="addBook()" ng-hide="book.authors.length < 1 || bookForm.title.$invalid">Dodaj książkę</button>
+			<button class="btn btn-primary" ng-click="addAuthor()">Dodaj autora</button>
+			<button type="submit" class="btn btn-primary" ng-click="submitted=true" >Dodaj książkę</button>
 			<button class="btn btn-warning" ng-click="$dismiss()">Anuluj</button>
 		</div>
 	</form>

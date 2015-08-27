@@ -1,4 +1,4 @@
-angular.module('app.books').controller('BookAddController', function ($scope, $modalInstance, bookService) {
+angular.module('app.books').controller('BookAddController', function ($scope, $modalInstance, $modal, bookService) {
 	'use strict';
 	
 	$scope.book = {
@@ -14,9 +14,13 @@ angular.module('app.books').controller('BookAddController', function ($scope, $m
     };
 	
 	$scope.addAuthor = function () {
-		if($scope.author.firstName.length > 0 && $scope.author.lastName.length > 0) {
-			$scope.book.authors.push(angular.copy($scope.author));
-		}
+		$modal.open({
+            templateUrl: 'books/html/add-author.html',
+            controller: 'AuthorAddController',
+            size: 'lg'
+        }).result.then(function (result) {
+        	$scope.book.authors.push(result);
+        });
 	};
 	
 	$scope.addBook = function () {

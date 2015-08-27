@@ -1,0 +1,22 @@
+<div>
+	<form novalidate name="authorForm" ng-submit="!authorForm.firstName.$invalid && !authorForm.lastName.$invalid && addAuthor()">
+		<div class="modal-header">
+			<h3 class="modal-title">Dodaj autora</h3>
+		</div>
+		<div class="modal-body">
+			
+			<p class="book-add-text">Imię: {{ author.firstName }}</p>
+			<p ng-show="submitted && authorForm.firstName.$invalid">Podaj imię.</p>
+			<input type="text" name="firstName" ng-model="author.firstName" ng-required="true">
+			<p class="book-add-text">Nazwisko: {{ author.lastName }}</p>
+			<p ng-show="submitted && authorForm.lastName.$invalid">Podaj nazwisko.</p>
+			<input type="text" name="lastName"  ng-model="author.lastName" ng-required="true">
+			
+		</div>
+		<div class="modal-footer">
+			
+			<button type="submit" class="btn btn-primary" ng-click="submitted=true" >Dodaj autora</button>
+			<button class="btn btn-warning" ng-click="$dismiss()">Anuluj</button>
+		</div>
+	</form>
+</div>
