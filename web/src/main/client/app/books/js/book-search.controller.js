@@ -4,6 +4,12 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.books = [];
     $scope.gridOptions = { data: 'books' };
     $scope.prefix = '';
+    
+    $scope._editResolve = function(item) {
+    	return function() {
+    		return angular.copy(item);
+    	};
+    };
 
 	var editBookById = function (editedBook) {
 		for (var i = 0; i < $scope.books.length; i = i + 1) {
@@ -55,9 +61,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
             controller: 'BookEditController',
             size: 'lg',
             resolve: {
-            	book: function() {
-            		return angular.copy(book);
-            	}
+            	book: $scope._editResolve(book)
             }
         }).result.then(function (result) {
         	var book = result;

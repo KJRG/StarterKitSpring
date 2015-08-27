@@ -8,15 +8,8 @@ describe('book controller', function () {
     });
 
     var $scope;
-    // , fakeModal;
     beforeEach(inject(function ($rootScope) {
         $scope = $rootScope.$new();
-        // fakeModal = {
-        // 	open: jasmine.createSpy('fakeModal.open'),
-        // 	result: {
-        // 		then: jasmine.createSpy('fakeModal.result.then')
-        // 	}
-        // };
     }));
 
     it('search is defined', inject(function ($controller) {
@@ -69,9 +62,14 @@ describe('book controller', function () {
     	// given
     	$controller('BookSearchController', {$scope: $scope});
     	$scope.books = [{id: 1, title: 'test1', authors: []}];
+    	var sampleBook = {
+    		id: 2,
+    		title: 'test2',
+    		authors: []
+    	};
     	var modalResult = {
     		then: function (callback) {
-    			callback('Test');
+    			callback(sampleBook);
     		}
     	};
     	spyOn($modal, 'open').and.returnValue({result: modalResult});
@@ -88,5 +86,49 @@ describe('book controller', function () {
         });
         expect($scope.books.length).toBe(2);
         expect(Flash.create).toHaveBeenCalledWith('success', 'Książka została dodana.', 'custom-class');
+    }));
+    
+    it('editBook should open modal', inject(function ($controller, $modal, bookService, Flash) {
+    	// given
+    	$controller('BookSearchController', {$scope: $scope});
+    	$scope.books = [{id: 1, title: 'test', authors: []}];
+    	var bookBeforeEditingTitle = {
+    		id: 1,
+    		title: 'test',
+    		authors: []
+    	};
+    	var sampleBook = {
+    		id: 1,
+    		title: 'modified',
+    		authors: []
+    	};
+    	var modalResult = {
+    		then: function(callback) {
+    			callback(sampleBook);
+    		}
+    	};
+    	spyOn($scope, '_editResolve').and.callFake(function (item) {
+    		return item;
+    	});
+    	spyOn($modal, 'open').and.returnValue({result: modalResult});
+    	spyOn(bookService, 'editBookTitle');
+    	spyOn(Flash, 'create');
+    	
+    	// when
+    	$scope.editBook(bookBeforeEditingTitle);
+    	
+    	// then
+    	expect($modal.open).toHaveBeenCalledWith({
+            templateUrl: 'books/html/edit-book.html',
+            controller: 'BookEditController',
+            size: 'lg',
+            resolve: {
+            	book: bookBeforeEditingTitle
+            }
+        });
+    	expect(bookService.editBookTitle).toHaveBeenCalledWith(sampleBook);
+    	expect(Flash.create).toHaveBeenCalledWith('success', 'Tytuł książki został zmieniony.', 'custom-class');
+    	expect($scope.books.length).toBe(1);
+    	expect($scope.books[0].title).toEqual('modified');
     }));
 });
