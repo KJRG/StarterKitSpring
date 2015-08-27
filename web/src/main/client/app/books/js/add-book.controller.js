@@ -7,12 +7,6 @@ angular.module('app.books').controller('BookAddController', function ($scope, $m
 		authors : []
 	};
 	
-	$scope.author = {
-        id : null,
-        firstName : '',
-        lastName : ''
-    };
-	
 	$scope.addAuthor = function () {
 		$modal.open({
             templateUrl: 'books/html/add-author.html',

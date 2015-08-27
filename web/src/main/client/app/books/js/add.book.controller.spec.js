@@ -27,13 +27,7 @@ describe('book add controller', function () {
 			title: 'test',
 			authors: []
 		};
-		var sampleAuthor = {
-			id: 1,
-			firstName: 'Test',
-			lastName: 'Test'
-		};
 		$scope.book = sampleBook;
-		$scope.author = sampleAuthor;
 		ctrl = $controller('BookAddController', {
 			$scope: $scope,
 			$modalInstance: modalInstance,
@@ -51,11 +45,11 @@ describe('book add controller', function () {
 		expect($scope.addBook).toBeDefined();
 	}));
 	
-	it('addAuthor should add author', inject(function () {
+	it('addAuthor should open add author modal', inject(function ($modal) {
 		// given
 		var sampleBook = {
 			id: 1,
-			title: 'test',
+			title: 'Test',
 			authors: []
 		};
 		var sampleAuthor = {
@@ -63,13 +57,25 @@ describe('book add controller', function () {
 			firstName: 'Test',
 			lastName: 'Author'
 		};
+		
 		$scope.book = sampleBook;
-		$scope.author = sampleAuthor;
+		
+		var modalResult = {
+    		then: function (callback) {
+    			callback(sampleAuthor);
+    		}
+    	};
+    	spyOn($modal, 'open').and.returnValue({result: modalResult});
 		
 		// when
 		$scope.addAuthor();
 		
 		// then
+    	expect($modal.open).toHaveBeenCalledWith({
+            templateUrl: 'books/html/add-author.html',
+            controller: 'AuthorAddController',
+            size: 'lg'
+        });
 		expect($scope.book.authors.length).toBe(1);
 	}));
 	
@@ -80,18 +86,11 @@ describe('book add controller', function () {
 			title: 'test',
 			authors: []
 		};
-		var sampleAuthor = {
-			id: 1,
-			firstName: 'Test',
-			lastName: 'Author'
-		};
 		
 		var deferred = $q.defer();
 		spyOn(bookService, 'saveBook').and.returnValue(deferred.promise);
 		
 		$scope.book = sampleBook;
-		$scope.author = sampleAuthor;
-		$scope.addAuthor();
 		
 		// when
 		$scope.addBook();
