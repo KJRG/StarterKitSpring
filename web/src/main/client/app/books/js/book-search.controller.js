@@ -52,6 +52,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         }).result.then(function (result) {
         	$scope.books.push(result);
         	Flash.create('success', 'Książka została dodana.', 'custom-class');
+        }, function () {
         });
     };
 

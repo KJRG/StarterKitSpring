@@ -10,4 +10,8 @@ angular.module('app.books').controller('AuthorAddController', function ($scope, 
 	$scope.addAuthor = function () {
 		$modalInstance.close($scope.author);
 	};
+	
+	$scope.cancel = function () {
+		$modalInstance.dismiss();
+	};
 });

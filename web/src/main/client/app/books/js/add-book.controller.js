@@ -8,12 +8,14 @@ angular.module('app.books').controller('BookAddController', function ($scope, $m
 	};
 	
 	$scope.addAuthor = function () {
+		$scope.isLocked = true;
 		$modal.open({
             templateUrl: 'books/html/add-author.html',
             controller: 'AuthorAddController',
             size: 'lg'
         }).result.then(function (result) {
         	$scope.book.authors.push(result);
+        }, function () {
         });
 	};
 	
@@ -21,5 +23,9 @@ angular.module('app.books').controller('BookAddController', function ($scope, $m
 		bookService.saveBook($scope.book).then(function (response) {
 			$modalInstance.close(response.data);
 		});
+	};
+	
+	$scope.cancel = function () {
+		$modalInstance.dismiss();
 	};
 });
